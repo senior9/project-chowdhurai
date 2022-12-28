@@ -1,0 +1,12 @@
+/* #collasible-nav-dropdown{
+    background-color:#0dcaf0;
+} */
+.navbar-nav .dropdown-menu{
+    background-color:#fff;
+}
+.navbar-toggler-icon{
+    background-color: #b02a37;
+}
+.dropdown-toggle::after{
+    background-color: black;
+}
