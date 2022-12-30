@@ -1,9 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./Login.css"
 import logo from "../../Images/chowdhuranyLogo-03.png";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../firebse.Init';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import Form from 'react-bootstrap/esm/Form';
+import Button from 'react-bootstrap/esm/Button';
+import { async } from '@firebase/util';
 
 const Login = () => {
+
+const navigate=useNavigate();
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+      ] = useSignInWithEmailAndPassword(auth);
+
+
+const handleLogInSubmitForm= async(event) => {
+    event.preventDefault();
+    const email=event.target.email.value;
+    const password=event.target.pass.value;
+    await signInWithEmailAndPassword(email,password);
+}
+ useEffect(()=>{
+    if(user){
+        navigate('/about');
+       }
+ },[user, navigate]);
+    
+
     return (
         <div className='login container mt-5'>
 
@@ -21,14 +49,14 @@ const Login = () => {
                     <input className='input' type="email" name="email" placeholder="E-mail" />
                     <input className='input' type="password" name="pass" placeholder="Password" />
                     <input className='input' type="password" name="repass" placeholder="Repeat password" />
-                    <a href="#" className="login-btn" id="signup-btn">Sign Up</a>
+                    <a  className="login-btn" id="signup-btn">Sign Up</a>
                 </form>
 
-                <form id="login-form">
-                    <input className='input' type="email" name="email" placeholder="E-mail" />
-                    <input className='input' type="password" name="pass" placeholder="Password" />
-                    <a href="#" className="login-btn">Log in</a>
-                </form>
+                <Form onSubmit={handleLogInSubmitForm} style={{bottom:'240px'}} id="login-form">
+                    <input required className='input' type="email" name="email" placeholder="E-mail" />
+                    <input required className='input' type="password" name="pass" placeholder="Password" />
+                    <Button variant='danger' type='submit' className="login-btn">Log in</Button>
+                </Form>
 
                 <form id="fpass-form">
                     <input className='input' type="text" name="forgotten" placeholder="E-mail or phone number" />

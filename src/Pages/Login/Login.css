@@ -15,6 +15,7 @@
     background: rgba(186, 169, 169, 0.5);
     color: red;
   } */
+ 
   
   .mobile-screen{
     position: relative;
@@ -47,8 +48,8 @@
   .logo{
     position: relative;
     top: 30px;
-    width: 200px;
-    height: 250px;
+    width: 100px;
+    height: 100px;
     margin: auto;
     background: url(https://i.ibb.co/jMrKvSm/Whats-App-Image-2022-12-26-at-10-34-43-PM-1.png) no-repeat center; 
     -webkit-background-size: cover;
@@ -170,4 +171,29 @@
     bottom: 0;
     margin: auto;
     background: rgba(255,255,255,.5);
+  }
+  @media only screen and (max-width: 576px){
+    .mobile-screen{
+    position: relative;
+    margin: auto;
+    top: 0; left: 0; bottom: 0; right: 0;
+    width: 300px;
+    height: 750px;
+    background: rgb(121, 2, 2);
+    overflow:hidden;
+
+    }
+  
+  }
+  @media only screen and(min-width: 577px) and (max-width: 992px) {
+    .mobile-screen{
+    position: relative;
+    margin: auto;
+    top: 0; left: 0; bottom: 0; right: 0;
+    width: 400px;
+    height: 750px;
+    background: rgb(121, 2, 2);
+    overflow:hidden;
+    }
+    
   }

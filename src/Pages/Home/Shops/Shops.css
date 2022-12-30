@@ -4,3 +4,15 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
 }
+/* Make responsive-layout  */
+@media only screen and (max-width: 576px) {
+    .card-container{
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+}
+@media only screen and (min-width: 577px) and (max-width:992px) {
+    .card-container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

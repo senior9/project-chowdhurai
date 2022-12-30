@@ -10,7 +10,7 @@ import "./Header.css"
 const Header = () => {
     return (
         <div>
-            <Navbar className='fixed-top' sticky='top' collapseOnSelect expand="lg" bg="light" variant="dark">
+            <Navbar fixed={'top'} className={'position-sticky ps-0' } collapseOnSelect expand="lg" bg="light" variant="dark">
                 <Navbar.Brand as={Link}  to ="/" className='mx-5' href="#home">
                     <img className='' style={{ height: "40px" }} src={logo} alt="" />
 
@@ -29,8 +29,9 @@ const Header = () => {
                         </NavDropdown>
                     </Nav>
                     <Nav className="gap-5 mx-5">
-                        <Nav.Link as={Link} to='blog' className='text-danger' href="#deets">Blog</Nav.Link>
-                        <Nav.Link as={Link} to='login' className='text-danger' eventKey={2} href="#memes">
+                        <Nav.Link as={Link} to='/blogs' className='text-danger' href="#blog">Blog</Nav.Link>
+                        <Nav.Link as={Link} to='/about' className='text-danger' href="#blog">About</Nav.Link>
+                        <Nav.Link as={Link} to='/login' className='text-danger' eventKey={2} href="#memes">
                             <strong>Login</strong>
                         </Nav.Link>
                     </Nav>
