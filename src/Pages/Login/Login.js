@@ -1,36 +1,35 @@
-import React, { useEffect } from 'react';
+import React, {  } from 'react';
 import "./Login.css"
-import logo from "../../Images/chowdhuranyLogo-03.png";
-import { Link, useNavigate } from 'react-router-dom';
+// import logo from "../../Images/chowdhuranyLogo-03.png";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebse.Init';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import Form from 'react-bootstrap/esm/Form';
 import Button from 'react-bootstrap/esm/Button';
-import { async } from '@firebase/util';
+// import { async } from '@firebase/util';
 
 const Login = () => {
-
-const navigate=useNavigate();
+    const location = useLocation()
+    const navigate = useNavigate();
     const [
         signInWithEmailAndPassword,
         user,
         loading,
         error,
-      ] = useSignInWithEmailAndPassword(auth);
+    ] = useSignInWithEmailAndPassword(auth);
 
 
-const handleLogInSubmitForm= async(event) => {
-    event.preventDefault();
-    const email=event.target.email.value;
-    const password=event.target.pass.value;
-    await signInWithEmailAndPassword(email,password);
-}
- useEffect(()=>{
-    if(user){
-        navigate('/about');
-       }
- },[user, navigate]);
-    
+    const handleLogInSubmitForm = async (event) => {
+        event.preventDefault();
+        const email = event.target.email.value;
+        const password = event.target.pass.value;
+        await signInWithEmailAndPassword(email, password);
+    }
+
+    const from = location?.state?.from?.pathname || '/';
+    if (user) {
+        navigate(from, { replace: true });
+    }
 
     return (
         <div className='login container mt-5'>
@@ -49,10 +48,10 @@ const handleLogInSubmitForm= async(event) => {
                     <input className='input' type="email" name="email" placeholder="E-mail" />
                     <input className='input' type="password" name="pass" placeholder="Password" />
                     <input className='input' type="password" name="repass" placeholder="Repeat password" />
-                    <a  className="login-btn" id="signup-btn">Sign Up</a>
+                    {/* <a className="login-btn" id="signup-btn">Sign Up</a> */}
                 </form>
 
-                <Form onSubmit={handleLogInSubmitForm} style={{bottom:'240px'}} id="login-form">
+                <Form onSubmit={handleLogInSubmitForm} style={{ bottom: '240px' }} id="login-form">
                     <input required className='input' type="email" name="email" placeholder="E-mail" />
                     <input required className='input' type="password" name="pass" placeholder="Password" />
                     <Button variant='danger' type='submit' className="login-btn">Log in</Button>
@@ -60,7 +59,7 @@ const handleLogInSubmitForm= async(event) => {
 
                 <form id="fpass-form">
                     <input className='input' type="text" name="forgotten" placeholder="E-mail or phone number" />
-                    <a href="#" className="login-btn" id="getpass-btn">Get Password</a>
+                    <Button className="login-btn" id="getpass-btn">Get Password</Button>
                 </form>
 
                 <div className="other-options">

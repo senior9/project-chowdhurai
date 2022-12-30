@@ -1,13 +1,22 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
 // import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../../firebse.Init';
 import logo from "../../../Images/chowdhuranyLogo-03.png";
 import "./Header.css"
 
 const Header = () => {
+const [user]=useAuthState(auth);
+const handleSignout=() => {
+    signOut(auth);
+}
+
+
     return (
         <div>
             <Navbar fixed={'top'} className={'position-sticky ps-0' } collapseOnSelect expand="lg" bg="light" variant="dark">
@@ -31,9 +40,16 @@ const Header = () => {
                     <Nav className="gap-5 mx-5">
                         <Nav.Link as={Link} to='/blogs' className='text-danger' href="#blog">Blog</Nav.Link>
                         <Nav.Link as={Link} to='/about' className='text-danger' href="#blog">About</Nav.Link>
-                        <Nav.Link as={Link} to='/login' className='text-danger' eventKey={2} href="#memes">
+                        { user? 
+
+                        <Nav.Link as={Link} onClick={handleSignout} to='/login' className='text-danger' eventKey={2} href="#memes">
+                            <strong>Sign Out</strong>
+                        </Nav.Link>
+                        :
+                            <Nav.Link as={Link} to='/login' className='text-danger' eventKey={2} href="#memes">
                             <strong>Login</strong>
                         </Nav.Link>
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
